@@ -29,6 +29,7 @@ directory "/mounts" do
 end
 
 directory "/mounts/dist" do
+  retries 2
   owner 'root'
   group 'root'
   mode '0755'

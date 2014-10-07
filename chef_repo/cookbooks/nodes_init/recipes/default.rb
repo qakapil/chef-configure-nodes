@@ -127,7 +127,7 @@ execute "run chef solo" do
 end
 
 execute "run chef solo with root" do
-          command "ssh root@#$p chef-solo -j /home/jenkins/workspace/chef_repo/nodes/nodes_master-root.json -c /home/jenkins/workspace/chef_repo/solo.rb"
+          command "ssh root@#$p chef-solo -j /home/jenkins/workspace/chef_repo/nodes/nodes_master-root.json -c /home/jenkins/workspace/chef_repo/solo-root2.rb"
 end
 
 
