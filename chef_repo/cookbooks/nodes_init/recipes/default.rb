@@ -6,6 +6,15 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+for $p in node['nodes']['ip']
+execute "remove from knownhost" do
+          user 'jenkins'
+          command "ssh-keygen -R #$p"
+end
+end
+
+
 for $p in node['nodes']['sname']
 execute "remove from knownhost" do
           user 'jenkins'
