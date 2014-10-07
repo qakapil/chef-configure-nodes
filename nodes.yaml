@@ -2,3 +2,10 @@ reboot_nodes:
 - teuthida-3
 - teuthida-2
 - teuthida-1
+config_nodes:
+- teuthida-3
+- teuthida-2
+- teuthida-1
+master_nodes:
+- teuthida-2
+- teuthida-1
