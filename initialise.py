@@ -25,7 +25,7 @@ for node in ctx['reboot_nodes']:
     pxe_file = '/srv/tftpboot/pxelinux.cfg/'+nodes_pxe[node][0]
     boot_file = '/srv/tftpboot/pxelinux.cfg/'+nodes_pxe[node][1]
     
-    cmd = "ssh root@autoinst-devel rm %s" % (pxe_file)
+    cmd = "ssh root@autoinst-devel rm %s || true" % (pxe_file)
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
         raise Exception, "Error while executing the command '%s'. \
@@ -51,7 +51,7 @@ for node in ctx['reboot_nodes']:
     pxe_file = '/srv/tftpboot/pxelinux.cfg/'+nodes_pxe[node][0]
     boot_file = '/srv/tftpboot/pxelinux.cfg/default'
     
-    cmd = "ssh root@autoinst-devel rm %s" % (pxe_file)
+    cmd = "ssh root@autoinst-devel rm %s || true" % (pxe_file)
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
         raise Exception, "Error while executing the command '%s'. \
