@@ -1,0 +1,4 @@
+reboot_nodes:
+- teuthida-3
+- teuthida-2
+- teuthida-1
