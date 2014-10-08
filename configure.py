@@ -31,3 +31,10 @@ f.write(tr2+"\n")
 f.write(tr3+"\n")
 f.write(tr4+"\n")
 f.close()
+
+cmd = "chef-solo -j chef_repo/nodes/nodes_init.json -c chef_repo/solo-init.rb"
+    rc,stdout,stderr = launch(cmd=cmd)
+    if rc != 0:
+        raise Exception, "Error while executing the command '%s'. \
+                          Error message: '%s'" % (cmd, stderr)
+
