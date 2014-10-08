@@ -23,7 +23,7 @@ nodes_pxe = {'teuthida-1':['01-c4-54-44-76-17-15','teuthida/pxe-ssd'],\
 
 for node in ctx['reboot_nodes']:
     pxe_file = '/srv/tftpboot/pxelinux.cfg/'+nodes_pxe[node][0]
-    boot_file = '/srv/tftpboot/pxelinux.cfg/'+node
+    boot_file = '/srv/tftpboot/pxelinux.cfg/'+nodes_pxe[node][1]
     
     cmd = "ssh root@autoinst-devel rm %s || true" % (pxe_file)
     rc,stdout,stderr = launch(cmd=cmd)
