@@ -25,7 +25,7 @@ tr2 = "default['nodes']['sname'] = " + str(ctx['config_nodes'])
 tr3 = "default['nodes']['master'] = " + str(ctx['master_nodes'])
 tr4 = "default['nodes']['ip'] = " + str(ctx['ip_nodes'])
 
-f = open("chef_repo/cookbooks/nodes_init/attributes/test.rb", "w")
+f = open("chef_repo/cookbooks/nodes_init/attributes/default.rb", "w")
 f.write(tr1+"\n")
 f.write(tr2+"\n")
 f.write(tr3+"\n")
