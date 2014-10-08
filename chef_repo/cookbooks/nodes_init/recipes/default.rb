@@ -93,7 +93,7 @@ execute "create dir" do
 end
 
 execute "copy chef_repo" do
-          command "scp -r chef_repo/ root@#$p:~/workspace"
+          command "scp -r ~/workspace/storage-bootstrap_nodes/chef_repo/ root@#$p:~/workspace"
 end
 
 execute "run chef solo" do
@@ -128,7 +128,7 @@ execute "create dir" do
 end
 
 execute "copy chef_repo" do
-          command "scp -r chef_repo/ jenkins@#$p:/home/jenkins/workspace"
+          command "scp -r ~/workspace/storage-bootstrap_nodes/chef_repo/ jenkins@#$p:/home/jenkins/workspace"
 end
 
 execute "run chef solo" do
