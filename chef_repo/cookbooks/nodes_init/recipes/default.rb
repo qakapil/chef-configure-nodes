@@ -8,19 +8,19 @@
 #
 
 for $p in node['nodes']['ip']
-execute "remove from knownhost" do
+execute "remove ip from knownhost" do
           user 'jenkins'
           command "ssh-keygen -R #$p"
 end
 end
 
 
-for $p in node['nodes']['sname']
-execute "remove from knownhost" do
+for $p in node['nodes']['fqdn']
+execute "remove fqdn from knownhost" do
           user 'jenkins'
           command "ssh-keygen -R #$p"
 end
-execute "add to knownhost" do
+execute "add fqdn to knownhost" do
           user 'jenkins'
           command "ssh-keyscan -H #$p >> ~/.ssh/known_hosts"
 end
@@ -29,15 +29,15 @@ end
 
 
 
-for $p in node['nodes']['fqdn']
+for $p in node['nodes']['sname']
 
 
-execute "remove from knownhost" do
+execute "remove sname from knownhost" do
           user 'jenkins'
           command "ssh-keygen -R #$p"
 end
 
-execute "add to knownhost" do
+execute "add sname to knownhost" do
           user 'jenkins'
           command "ssh-keyscan -H #$p >> ~/.ssh/known_hosts"
 end
@@ -133,10 +133,6 @@ end
 
 execute "run chef solo" do
           command "ssh jenkins@#$p chef-solo -j /home/jenkins/workspace/chef_repo/nodes/nodes_master.json -c /home/jenkins/workspace/chef_repo/solo.rb"
-end
-
-execute "run chef solo with root" do
-          command "ssh root@#$p chef-solo -j /home/jenkins/workspace/chef_repo/nodes/nodes_master-root.json -c /home/jenkins/workspace/chef_repo/solo-root2.rb"
 end
 
 

@@ -14,12 +14,12 @@ execute 'generate ssh key for jenkins' do
         ssh-keygen -t rsa -q -f /home/jenkins/.ssh/id_rsa -P "" ; fi'
 end
 
-for $p in node['nodes']['sname']
-execute "remove from knownhost" do
+for $p in node['nodes']['fqdn']
+execute "remove fqdn from knownhost" do
           user 'jenkins'
           command "ssh-keygen -R #$p || true"
 end
-execute "add to knownhost" do
+execute "add fqdn to knownhost" do
           user 'jenkins'
           command "ssh-keyscan -H #$p >> ~/.ssh/known_hosts"
 end
@@ -28,14 +28,14 @@ end
 
 
 
-for $p in node['nodes']['fqdn']
+for $p in node['nodes']['sname']
 
-execute "remove from knownhost" do
+execute "remove sname from knownhost" do
           user 'jenkins'
           command "ssh-keygen -R #$p || true"
 end
 
-execute "add to knownhost" do
+execute "add sname to knownhost" do
           user 'jenkins'
           command "ssh-keyscan -H #$p >> ~/.ssh/known_hosts"
 end
@@ -51,4 +51,3 @@ bash "ssh-copy-id" do
 end
 
 end
-
