@@ -2,6 +2,7 @@ import yaml
 from launch import launch
 import logging
 import time
+import os
 
 log = logging.getLogger(__name__)
 
@@ -26,24 +27,28 @@ for node in ctx['reboot_nodes']:
     boot_file = '/srv/tftpboot/pxelinux.cfg/'+nodes_pxe[node][1]
     
     cmd = "ssh root@autoinst-devel rm %s || true" % (pxe_file)
+    print "executing the command - "+cmd
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
         raise Exception, "Error while executing the command '%s'. \
                           Error message: '%s'" % (cmd, stderr)
     
     cmd = "ssh root@autoinst-devel ln -s %s %s" % (boot_file, pxe_file)
+    print "executing the command - "+cmd
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
         raise Exception, "Error while executing the command '%s'. \
                           Error message: '%s'" % (cmd, stderr)
     
     cmd = "ssh root@%s sudo reboot" % (node)
+    print "executing the command - "+cmd
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 255:
         raise Exception, "Error while executing the command '%s'. \
                           Error message: '%s'" % (cmd, stderr)
                           
                           
+print "waiting for 300 seconds before removing autoyast pxe config"
 time.sleep(300)
 
 
@@ -52,16 +57,34 @@ for node in ctx['reboot_nodes']:
     boot_file = '/srv/tftpboot/pxelinux.cfg/default'
     
     cmd = "ssh root@autoinst-devel rm %s || true" % (pxe_file)
+    print "executing the command - "+cmd
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
         raise Exception, "Error while executing the command '%s'. \
                           Error message: '%s'" % (cmd, stderr)
     
     cmd = "ssh root@autoinst-devel ln -s %s %s" % (boot_file, pxe_file)
+    print "executing the command - "+cmd
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
         raise Exception, "Error while executing the command '%s'. \
                           Error message: '%s'" % (cmd, stderr)                    
 
-
-
+counter = 0
+while len(ctx['reboot_nodes']) > 0:
+    for node in ctx['reboot_nodes']:
+        print "pinging "+ node
+        response = os.system("ping -c 4 " + node)
+        if response == 0:
+            print "ping was successfull"
+            ctx['reboot_nodes'].remove(node)
+        if len(ctx['reboot_nodes']) == 0:
+            print "all the nodes rebooted successfully"
+            break
+        counter += 1
+        if counter > 120:
+            print "All nodes did not reboot after 30 mins "
+            raise Exception, "Following nodes did not reboot after 30 mins "\
+            + str(ctx['reboot_nodes'])
+        print "still waiting for nodes - "+str(ctx['reboot_nodes'])
+        time.sleep(5)
