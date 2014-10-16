@@ -37,7 +37,7 @@ execute "remove fqdn from knownhost" do
 end
 execute "add fqdn to knownhost" do
           user 'jenkins'
-          command "ssh-keyscan -H #$p >> ~/.ssh/known_hosts"
+          command "ssh-keyscan -H #$p >> ~/home/jenkins/.ssh/known_hosts"
 end
 end
 
@@ -58,7 +58,7 @@ end
 bash "ssh-copy-id" do
     user "root"
     code <<-EOF
-    /usr/bin/expect -c 'spawn ssh-copy-id root@#$p
+    /usr/bin/expect -c 'spawn ssh-copy-id jenkins@#$p
     expect "Password: "
     send "calvin\r"
     expect eof'
@@ -76,7 +76,7 @@ end
 
 execute "add sname to knownhost" do
           user 'jenkins'
-          command "ssh-keyscan -H #$p >> ~/.ssh/known_hosts"
+          command "ssh-keyscan -H #$p >> home/jenkins/.ssh/known_hosts"
 end
 
 bash "ssh-copy-id" do
