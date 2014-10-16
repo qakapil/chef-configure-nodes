@@ -1,5 +1,4 @@
-#
-# Cookbook Name:: nodes_init
+#cookbook Name:: nodes_init
 # Recipe:: default
 #
 # Copyright 2014, YOUR_COMPANY_NAME
@@ -41,6 +40,7 @@ execute "add sname to knownhost" do
           user 'jenkins'
           command "ssh-keyscan -H #$p >> ~/.ssh/known_hosts"
 end
+
 
 bash "ssh-copy-id" do
     user "jenkins"
@@ -119,20 +119,9 @@ end
 
 for $p in node['nodes']['master']
 
-execute "remove old dir" do
-          command "ssh jenkins@#$p rm -rf workspace"
-end
-
-execute "create dir" do
-          command "ssh jenkins@#$p mkdir workspace"
-end
-
-execute "copy chef_repo" do
-          command "scp -r ~/workspace/storage-bootstrap_nodes/chef_repo/ jenkins@#$p:/home/jenkins/workspace"
-end
 
 execute "run chef solo" do
-          command "ssh jenkins@#$p chef-solo -j /home/jenkins/workspace/chef_repo/nodes/nodes_master.json -c /home/jenkins/workspace/chef_repo/solo.rb"
+          command "ssh root@#$p chef-solo -j /root/workspace/chef_repo/nodes/nodes_master.json -c /root/workspace/chef_repo/solo.rb"
 end
 
 
