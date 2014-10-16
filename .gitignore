@@ -3,3 +3,5 @@
 /.project
 *.log
 *~
+*.yaml
+chef_repo/cookbooks/nodes_init/attributes/default.rb
