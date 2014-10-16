@@ -8,7 +8,7 @@ reboot_nodes:
 - teuthida-7
 - teuthida-8
 - teuthida-9
-- teuthida10
+- teuthida-10
 config_nodes:
 - teuthida-1
 - teuthida-2
@@ -19,7 +19,7 @@ config_nodes:
 - teuthida-7
 - teuthida-8
 - teuthida-9
-- teuthida10
+- teuthida-10
 master_nodes:
 - teuthida-10
 - teuthida-6
