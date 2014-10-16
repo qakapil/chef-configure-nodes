@@ -119,6 +119,17 @@ end
 
 for $p in node['nodes']['master']
 
+execute "remove old dir" do
+          command "ssh root@#$p rm -rf workspace"
+end
+
+execute "create dir" do
+          command "ssh root@#$p mkdir workspace"
+end
+
+execute "copy chef_repo" do
+          command "scp -r ~/workspace/storage-bootstrap_nodes/chef_repo/ root@#$p:~/workspace"
+end
 
 execute "run chef solo" do
           command "ssh root@#$p chef-solo -j /root/workspace/chef_repo/nodes/nodes_master.json -c /root/workspace/chef_repo/solo.rb"

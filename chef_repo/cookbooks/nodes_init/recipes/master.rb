@@ -37,7 +37,7 @@ execute "remove fqdn from knownhost" do
 end
 execute "add fqdn to knownhost" do
           user 'jenkins'
-          command "ssh-keyscan -H #$p >> ~/home/jenkins/.ssh/known_hosts"
+          command "ssh-keyscan -H #$p >> /home/jenkins/.ssh/known_hosts"
 end
 end
 
@@ -76,7 +76,7 @@ end
 
 execute "add sname to knownhost" do
           user 'jenkins'
-          command "ssh-keyscan -H #$p >> home/jenkins/.ssh/known_hosts"
+          command "ssh-keyscan -H #$p >> /home/jenkins/.ssh/known_hosts"
 end
 
 bash "ssh-copy-id" do
