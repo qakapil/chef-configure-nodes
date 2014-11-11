@@ -3,7 +3,9 @@ from launch import launch
 import logging
 import time
 import socket
+import sys
 
+sys.stdout.flush()
 log = logging.getLogger(__name__)
 
 
