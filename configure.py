@@ -20,12 +20,17 @@ for node in ctx['config_nodes']:
     ctx['fqdn_nodes'].append(fqdn)
     ctx['ip_nodes'].append(ip)
 
+if ctx['master_nodes'] == None:
+   mn = str([])
+else:
+   mn = str(ctx['master_nodes'])
 print str(ctx['config_nodes'])
 
 tr1 = "default['nodes']['fqdn'] = " + str(ctx['fqdn_nodes'])
 tr2 = "default['nodes']['sname'] = " + str(ctx['config_nodes'])
-tr3 = "default['nodes']['master'] = " + str(ctx['master_nodes'])
+tr3 = "default['nodes']['master'] = " + mn
 tr4 = "default['nodes']['ip'] = " + str(ctx['ip_nodes'])
+
 
 f = open("chef_repo/cookbooks/nodes_init/attributes/default.rb", "w")
 f.write(tr1+"\n")

@@ -6,7 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-for p in [ "ruby2.1-rubygem-ruby-shadow", "gcc", "git", "python-pip", "libevent-devel", "python-devel"] do
+for p in [ "ruby2.1-rubygem-ruby-shadow", "gcc", "git", "python-pip", "libevent-devel", "python-devel", "python-virtualenv", "dbench", "iozone"] do
   package p do
     action [:install]
   end

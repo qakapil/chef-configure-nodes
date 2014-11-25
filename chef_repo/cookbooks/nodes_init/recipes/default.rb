@@ -73,6 +73,14 @@ execute "add ibs sle12 repo" do
           command "ssh root@#$p zypper ar http://dist.suse.de/ibs/SUSE:/SLE-12:/GA/standard/ ibs-sle12"
 end
 
+
+
+execute "add benchmark repo" do
+          command "ssh root@#$p zypper ar http://download.opensuse.org/repositories/benchmark/SLE_12/ benchmark"
+end
+
+
+
 execute "refresh repos" do
           command "ssh root@#$p zypper --gpg-auto-import-keys --non-interactive refresh"
 end
