@@ -25,8 +25,8 @@ for node in ctx['config_nodes']:
        nic_prefix = "p2"
     else:
        nic_prefix = "p1"
-    filename1 = 'ifcfg_'+nic_prefix+'p1'
-    filename2 = 'ifcfg_'+nic_prefix+'p2'
+    filename1 = 'ifcfg-'+nic_prefix+'p1'
+    filename2 = 'ifcfg-'+nic_prefix+'p2'
     fw = open(filename1, "w")
     fw.write(ifcfg_p1)
     fw.close()
@@ -43,7 +43,7 @@ for node in ctx['config_nodes']:
     interface1 = nic_prefix+'p1'
     interface2 = nic_prefix+'p2'
     
-    cmd = "ssh root@%s ifdown em1 && sleep 5 && ifup %s && sleep 10 && ifup %s && sleep 10 && route add default gw 10.160.255.254 %s"\
+    cmd = "ssh root@%s 'ifdown em1 && sleep 5 && ifup %s && sleep 10 && ifup %s && sleep 10 && route add default gw 10.160.255.254 %s'"\
           % (node, interface1, interface2, interface1)
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
