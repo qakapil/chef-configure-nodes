@@ -70,7 +70,7 @@ execute "refresh repos" do
 end
 
 execute "add chef repo" do
-          command "ssh root@#$p zypper ar http://download.suse.de/ibs/Devel:/Cloud:/Shared:/12/standard chef"
+          command "ssh root@#$p zypper ar http://download.opensuse.org/repositories/systemsmanagement:/chef:/10/openSUSE_13.1 chef"
 end
 
 execute "add ibs sle12 repo" do
