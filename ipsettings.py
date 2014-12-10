@@ -35,6 +35,7 @@ for node in ctx['config_nodes']:
     fw.close()
 
     cmd = "scp %s %s root@%s:/etc/sysconfig/network/" % (filename1, filename2, node)
+    print("executing the command - "+cmd)
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
         raise Exception, "Error while executing the command '%s'. \
@@ -45,6 +46,7 @@ for node in ctx['config_nodes']:
     
     cmd = "ssh root@%s 'ifdown em1 && sleep 5 && ifup %s && sleep 10 && ifup %s && sleep 10 && route add default gw 10.160.255.254 %s'"\
           % (node, interface1, interface2, interface1)
+    print("executing the command - "+cmd)
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
         raise Exception, "Error while executing the command '%s'. \
