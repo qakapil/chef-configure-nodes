@@ -44,8 +44,17 @@ for node in ctx['config_nodes']:
     interface1 = nic_prefix+'p1'
     interface2 = nic_prefix+'p2'
     
-    cmd = "ssh root@%s 'ifdown em1 && sleep 5 && ifup %s && sleep 10 && ifup %s && sleep 10 && route add default gw 10.160.255.254 %s'"\
-          % (node, interface1, interface2, interface1)
+    cmd = "ssh root@%s 'ifdown em1 && sleep 5 && ifup %s && sleep 10 && route add default gw 10.160.255.254 %s'"\
+          % (node, interface1, interface1)
+    print("executing the command - "+cmd)
+    rc,stdout,stderr = launch(cmd=cmd)
+    if rc != 0:
+        raise Exception, "Error while executing the command '%s'. \
+                          Error message: '%s'" % (cmd, stderr)
+
+
+    cmd = "ssh root@%s 'ifdown %s && sleep 5 && ifup %s'"\
+          % (node, interface2, interface2)
     print("executing the command - "+cmd)
     rc,stdout,stderr = launch(cmd=cmd)
     if rc != 0:
