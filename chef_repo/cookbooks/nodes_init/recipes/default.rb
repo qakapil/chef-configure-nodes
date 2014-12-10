@@ -61,6 +61,10 @@ execute "remove old ibs sle12 repo" do
           command "ssh root@#$p zypper rr ibs-sle12"
 end
 
+execute "remove old benchmark repo" do
+          command "ssh root@#$p zypper rr benchmark"
+end
+
 execute "refresh repos" do
           command "ssh root@#$p zypper --gpg-auto-import-keys --non-interactive refresh"
 end
