@@ -17,9 +17,10 @@ ifcfg_template = fr.read()
 fr.close()
 
 for node in ctx['config_nodes']:
+    orig_ip = socket.gethostbyname(node)
     ip = socket.gethostbyname(node)+'/16'
     ifcfg_p1 = ifcfg_template % ('dhcp', ip)
-    private_ip = '10.0.0.'+ip.split(".")[3]+'/8'
+    private_ip = '10.0.0.'+orig_ip.split(".")[3]+'/8'
     ifcfg_p2 = ifcfg_template % ('static', private_ip)
     if node in grp1:
        nic_prefix = "p2"

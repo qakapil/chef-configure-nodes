@@ -91,7 +91,7 @@ end
 
 
 execute "install ruby-gem" do
-          command "ssh root@#$p zypper --non-interactive --no-gpg-checks --quiet install rubygem-chef"
+          command "ssh root@#$p zypper --non-interactive --no-gpg-checks --quiet install ruby2.1-rubygem-chef"
 end
 
 
