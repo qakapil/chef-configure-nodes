@@ -74,7 +74,7 @@ execute "add chef repo" do
 end
 
 execute "add ibs sle12 repo" do
-          command "ssh root@#$p zypper ar http://dist.suse.de/ibs/SUSE:/SLE-12:/GA/standard/ ibs-sle12"
+          command "ssh root@#$p zypper ar http://dist.suse.de/install/SLP/SLE-12-Server-LATEST/x86_64/ ibs-sle12"
 end
 
 
