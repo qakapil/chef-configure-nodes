@@ -9,7 +9,7 @@ sys.stdout.flush()
 
 log = logging.getLogger(__name__)
 
-
+#this script will reboot and install fresh SLE12 on the given nodes
 document = open('nodes.yaml').read()
 ctx = yaml.load(document)
 
