@@ -73,9 +73,9 @@ execute "add chef repo" do
           command "ssh root@#$p zypper ar http://download.opensuse.org/repositories/systemsmanagement:/chef:/10/openSUSE_13.1 chef"
 end
 
-execute "add ibs sle12 repo" do
-          command "ssh root@#$p zypper ar http://dist.suse.de/install/SLP/SLE-12-Server-LATEST/x86_64/ ibs-sle12"
-end
+#execute "add ibs sle12 repo" do
+          #command "ssh root@#$p zypper ar http://dist.suse.de/install/SLP/SLE-12-Server-LATEST/x86_64/ ibs-sle12"
+#end
 
 
 
